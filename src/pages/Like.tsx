@@ -6,9 +6,23 @@ const Like = () => {
   const [status, setStatus] = useState<LikeStatus>(null);
   const [statusCounter, setStatusCounter] = useState({
     liked: 100,
-    dislike: 25,
+    disliked: 25,
   });
-  // Syntax: map((element, index, array) => {... return v})
+  const onStatusChange = (_status: LikeStatus) => {
+    if (_status === "liked")
+      setStatusCounter((prev) => ({
+        liked: status === _status ? prev.liked - 1 : prev.liked + 1,
+        disliked: status === "disliked" ? prev.disliked - 1 : prev.disliked,
+      }));
+
+    if (_status === "disliked")
+      setStatusCounter((prev) => ({
+        liked: status === "liked" ? prev.liked - 1 : prev.liked,
+        disliked: status === _status ? prev.disliked - 1 : prev.disliked + 1,
+      }));
+
+    setStatus((prev) => (prev !== _status ? _status : null));
+  };
 
   return (
     <article>
