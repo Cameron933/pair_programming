@@ -25,9 +25,13 @@ const Like = () => {
   };
 
   return (
-    <article>
+    <div>
       <h1>{status ?? "null"}</h1>
-    </article>
+      <button onClick={() => onStatusChange("liked")}>{`Like | ${statusCounter.liked}`}</button>
+      <button
+        onClick={() => onStatusChange("disliked")}
+      >{`Dislike | ${statusCounter.liked}`}</button>
+    </div>
   );
 };
 
